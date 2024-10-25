@@ -11,8 +11,7 @@ const queries = {
     if (!user) {
       throw customGraphqlError("Invalid/Expired token", "AUTHENTICATION_ERROR");
     }
-
-    const currentUser = await UserService.getUserById(user.userId);
+    const currentUser = await UserService.getUserById(user.id);
     return currentUser;
   }),
   getUserByEmail: authGuard(async (_: any, { email }: { email: string }) => {

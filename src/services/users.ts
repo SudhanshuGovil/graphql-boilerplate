@@ -46,7 +46,7 @@ class UserService {
     return await Users.findOne({ email });
   }
   public static async getUserById(id: string) {
-    return await Users.findOne({ id });
+    return await Users.findOne({ _id: id });
   }
   public static async getUserToken(payload: GetUserTokenPayload) {
     const { email, password } = payload;

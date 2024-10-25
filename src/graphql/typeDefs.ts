@@ -21,7 +21,6 @@ ${Users.typedefs}
 enum UserRoles {
     ADMIN,
     ANONYMOUS,
-    SUPER_ADMIN,
     USER,
 }
 `;

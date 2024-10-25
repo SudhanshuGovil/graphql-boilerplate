@@ -5,36 +5,41 @@ const userSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      require: true,
+      required: true,
     },
     lastName: {
       type: String,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     salt: {
       type: String,
-      require: true,
+      required: true,
     },
     password: {
       type: String,
-      require: true,
+      required: true,
     },
     role: {
-      type: String, // Store the role as a string in MongoDB
-      enum: Object.values(UserRoles), // Ensure it only accepts values from the UserRoles enum
+      type: String,
+      enum: Object.values(UserRoles),
       required: true,
-      default: UserRoles.USER, // Set the default role
+      default: UserRoles.USER,
     },
     phone: {
       type: String,
-      unique: true,
     },
   },
   { timestamps: true }
+);
+
+// Create a unique partial index for 'phone' where the value is non-null
+userSchema.index(
+  { phone: 1 },
+  { unique: true, partialFilterExpression: { phone: { $type: "string" } } }
 );
 
 export const Users = mongoose.model("users", userSchema);

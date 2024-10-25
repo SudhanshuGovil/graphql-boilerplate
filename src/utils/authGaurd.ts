@@ -21,7 +21,6 @@ export const authGuard =
       if (!user) {
         throw customGraphqlError("Not Authenticated", "AUTHENTICATION_ERROR");
       }
-      console.log({ permissions, role: user.role });
       if (!permissions.includes(user.role)) {
         throw customGraphqlError("Not Authorized", "AUTHORIZATION_ERROR");
       }
